@@ -1,5 +1,5 @@
 from telegram.ext import (Updater, CommandHandler, MessageHandler, Filters,
-                         RegexHandler, ConversationHandler)
+                          RegexHandler, ConversationHandler)
 from telegram import ReplyKeyboardMarkup, ReplyKeyboardRemove
 
 STATE1 = 1
@@ -21,35 +21,39 @@ def welcome(update, context):
 
 
 def inputPergunte(update, context):
-    pergunte = lower(update.message.text)
+    pergunte = (update.message.text).lower()
     print(pergunte)
     if (pergunte == '1'
-                or pergunte == 'cobrança'
-                or pergunte == 'setor de cobrança'):
+        or pergunte == 'cobrança'
+            or pergunte == 'setor de cobrança'):
         message = """Contrato... 
                         \n Divida
                         \n Negociação"""
-        context.bot.send_message(chat_id=update.effective_chat.id, text=message)
+        context.bot.send_message(
+            chat_id=update.effective_chat.id, text=message)
         return STATE2
-    else:
-          if (pergunte == '2'
-                or pergunte == 'financeiro' 
-                or pergunte =='setor financeiro'):
+    elif (pergunte == '2'
+          or pergunte == 'financeiro'
+          or pergunte == 'setor financeiro'):
         message = """Boleto... 
                         \n Debito
                         \n Credito"""
-        context.bot.send_message(chat_id=update.effective_chat.id, text=message)
-           return STATE2
+        context.bot.send_message(
+            chat_id=update.effective_chat.id, text=message)
+        return STATE2
+
 
 def inputResposta(update, context):
     message = "Muito obrigado, logo lhe daremos retorno"
     context.bot.send_message(chat_id=update.effective_chat.id, text=message)
 
+
 def cancel(update, context):
     return ConversationHandler.END
-    
+
+
 def main():
-    token='1337767378:AAFLwJJVPfmSP16UVc2TJ4MZXaLOLiQa1A0'
+    token = '1337767378:AAFLwJJVPfmSP16UVc2TJ4MZXaLOLiQa1A0'
     updater = Updater(token=token, use_context=True)
 
     updater.dispatcher.add_handler(CommandHandler('start', welcome))
@@ -66,6 +70,7 @@ def main():
     updater.start_polling()
     print('oi, eu sou o updater' + str(updater))
     updater.idle()
-    
+
+
 if __name__ == '__main__':
-      main() 
+    main()
