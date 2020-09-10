@@ -7,18 +7,24 @@ STATE2 = 2
 
 
 def welcome(update, context):
-    message = "Olá, " + update.message.from_user.first_name + '!'
-    print(message)
-    context.bot.send_message(chat_id=update.effective_chat.id, text=message)
+    try:
+        username = update.message.from_user.username
+        firstName = update.message.from_user.first_name
+        lastName = update.message.from_user.last_name
+        message = 'Olá, ' + firstName + '!'
+        context.bot.send_message(
+            chat_id=update.effective_chat.id, text=message)
+    except Exception as e:
+        print(str(e))
 
-    def pergunte(update, context):
-    message = '''Em que posso ajudar? \n
-            1 - setor de cobrança \n
-            2 - setor financeiro'''
-    update.message.reply_text(
-        message, reply_markup=ReplyKeyboardMarkup([], one_time_keyboard=True))
-    return STATE1
-
+def pergunte(update, context):
+    try:
+        message = '''Em que posso ajudar? \n 1 - setor de cobrança \n 2 - setor financeiro'''
+        update.message.reply_text(
+            message, reply_markup=ReplyKeyboardMarkup([], one_time_keyboard=True))
+        return STATE1
+    except Exception as e:
+        print(str(e))
 
 def inputPergunte(update, context):
     pergunte = (update.message.text).lower()
