@@ -23,18 +23,18 @@ def welcome(update, context):
 def inputPergunte(update, context):
     pergunte = lower(update.message.text)
     print(pergunte)
-    if pergunte == '1'
+    if (pergunte == '1'
                 or pergunte == 'cobrança'
-                or pergunte == 'setor de cobrança':
+                or pergunte == 'setor de cobrança'):
         message = """Contrato... 
                         \n Divida
                         \n Negociação"""
         context.bot.send_message(chat_id=update.effective_chat.id, text=message)
         return STATE2
     else:
-          if pergunte == '2'
+          if (pergunte == '2'
                 or pergunte == 'financeiro' 
-                or pergunte =='setor financeiro':
+                or pergunte =='setor financeiro'):
         message = """Boleto... 
                         \n Debito
                         \n Credito"""
